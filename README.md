@@ -63,16 +63,49 @@ machine, but you cannot self-host the thing it connects to.
 
 ## Install
 
+**Already have Node 22+?** One line, same on every platform:
+
 ```bash
 npm install -g @coen1/cli
 ```
+
+**Don't have Node, or would rather not think about it?** These do the whole thing — no `sudo`, no
+administrator, nothing written outside your own home directory:
+
+```bash
+# macOS and Linux
+curl -fsSL https://raw.githubusercontent.com/adamnlynn/-coen1-cli/main/install.sh | sh
+```
+
+```powershell
+# Windows
+irm https://raw.githubusercontent.com/adamnlynn/-coen1-cli/main/install.ps1 | iex
+```
+
+Each installer uses the Node you already have if it's new enough. If it isn't, it downloads an
+official build from nodejs.org into its own directory, **verifies its SHA-256 against the checksums
+nodejs.org publishes**, and uses that — your system Node is never touched or upgraded. The package
+itself comes from npm into a private prefix, and a `coen` launcher goes on your PATH.
+
+| | macOS / Linux | Windows |
+| --- | --- | --- |
+| Package and private Node | `~/.local/share/coen` | `%LOCALAPPDATA%\coen` |
+| Launcher | `~/.local/bin/coen` | `%LOCALAPPDATA%\coen\bin\coen.cmd` |
+| Uninstall | `rm -rf ~/.local/share/coen ~/.local/bin/coen` | `Remove-Item -Recurse "$env:LOCALAPPDATA\coen"` |
+
+Pin a version with `COEN_VERSION=0.1.0`; move the target with `COEN_INSTALL_DIR`.
+
+**Read them before you run them.** [install.sh](install.sh) and [install.ps1](install.ps1) are in
+this repo, and piping a script into your shell is something you should be able to check first.
+Nothing they install is opaque either: the package is on npm, its contents are the `dist/` built
+from the `src/` here, and `npm pack` reproduces it.
 
 <details>
 <summary>From source (for contributors)</summary>
 
 ```bash
 git clone https://github.com/adamnlynn/-coen1-cli.git
-cd coen1-cli
+cd -coen1-cli
 npm install
 npm run build
 npm link          # puts `coen` on your PATH from this checkout
@@ -80,9 +113,6 @@ npm link          # puts `coen` on your PATH from this checkout
 
 `npm run dev` runs it from TypeScript without building. `npm run typecheck` is the fast check.
 </details>
-
-> **Standalone binaries** for macOS, Linux and Windows — with a one-line `curl` installer and no
-> Node needed — are not published yet. The npm package above is the install path today.
 
 ## Sign in
 
