@@ -63,6 +63,12 @@ machine, but you cannot self-host the thing it connects to.
 
 ## Install
 
+**Just want to see it?** Runs it without installing anything:
+
+```bash
+npx @coen1/cli
+```
+
 **Already have Node 22+?** One line, same on every platform:
 
 ```bash
