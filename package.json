@@ -1,6 +1,6 @@
 {
   "name": "@coen1/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Coen 1 in your terminal \u2014 check in, tick habits, record decisions and read what came through, from the same record as the web app. A chat with your own model key is one command away.",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
   },
   "scripts": {
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && node -e \"require('fs').chmodSync('dist/index.js', 0o755)\"",
     "prepublishOnly": "npm run build",
     "typecheck": "tsc --noEmit",
     "dev": "tsx src/index.tsx",
