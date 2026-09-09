@@ -1,0 +1,35 @@
+# Build output and dependencies
+node_modules/
+dist/
+*.tsbuildinfo
+
+# npm auth. `npm config set //registry.npmjs.org/:_authToken=…` and most CI publish snippets write
+# a PROJECT-LOCAL .npmrc, and this repo publishes to npm — so this line is the one standing between
+# a routine setup step and a publish token in a public repo. It is first for a reason.
+.npmrc
+
+# `npm pack` output. Easy to run while debugging what ships, easy to commit by accident, and it is
+# a full copy of the package.
+*.tgz
+
+# Secrets. .env.example is checked in on purpose and must NOT be ignored — hence the negation.
+.env
+.env.*
+!.env.example
+
+# Logs and crash dumps
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Test and coverage output, if either ever lands here
+coverage/
+.nyc_output/
